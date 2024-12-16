@@ -33,17 +33,35 @@ function checkPotion() {
     console.log(`${x.Ingredient}: ${x.Count}`);
   });
 
-  if (brewPotion())
+  if (brewHealingPotion())
     console.log("Congratulations! You've brewed a perfect healing potion!");
+  if(brewShrinkingPotion())
+    console.log("Congratulations! You've brewed a perfect shrinking potion!");
 }
 
-function brewPotion() {
+function brewHealingPotion() {
   const healing = [2, 1, 1, 0, 0];
   for (let i = 0; i < healing.length; i++) {
     if (cauldron[i].Count != healing[i]) return false;
   }
   return true;
 }
+
+function brewShrinkingPotion() {
+  const shrink = [5, 0, 1, 2, 1];
+  for (let i = 0; i < shrink.length; i++) {
+    if (cauldron[i].Count != shrink[i]) return false;
+  }
+  return true;
+}
+
+function cleanCauldron() {
+  cauldron.forEach((x) => {
+    x.Count = 0;
+  });
+  console.log("The cauldron has been scrubbed clean!");
+}
+
 window.addEventListener("keydown", (e) => {
   if (e.key == "F12") {
     checkPotion();
